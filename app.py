@@ -491,6 +491,8 @@ def app():
         with open ('assets/txt/user_wishlist.txt', 'a') as wishlistfile:
             wishlistfile.write (f'{datetime.datetime.now ()}\t:{user_wishlist}\t{user_email}\n')
         st.write ('Thanks for your feedback!')
+    st.markdown('Docker image:')
+    st.code('docker pull zesys0/oceanviewstreamlitapp')
 
 if __name__ == '__main__':
     app()       
