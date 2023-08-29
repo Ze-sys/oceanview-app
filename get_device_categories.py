@@ -17,7 +17,7 @@ def get_device_categories(token, propertyCode=''):
     if (response.ok):
         deviceCategories = json.loads(str(response.content,'utf-8'))
         for deviceCategory in deviceCategories:
-            df = df.append(pd.DataFrame(deviceCategory,index=[0]))
+            df = pd.concat([df,pd.DataFrame(deviceCategory,index=[0])])
         return df
     else:
         if(response.status_code == 400):
