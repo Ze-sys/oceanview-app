@@ -45,9 +45,8 @@ def app():
         onc = ONC (token)  
 
         deviceCat = gdc.get_device_categories(token)
-        deviceCat = deviceCat[['deviceCategoryCode', 'deviceCategoryName']].append (
-                    pd.DataFrame ({"deviceCategoryCode": [], "deviceCategoryName":[]}),
-                    ignore_index=True).shift (1).fillna ("Select Device Category Name")
+        deviceCat = pd.concat ([deviceCat, pd.DataFrame ({"deviceCategoryCode": [], "deviceCategoryName":[]})],
+                                ignore_index=True).shift (1).fillna ("Select Device Category Name")
 
         deviceCategoryCode = deviceCat['deviceCategoryCode'].tolist ()
 
@@ -251,7 +250,7 @@ def app():
                         # )
                         return None
 
-                @st.cache
+                @st.cache_data
                 def get_data_for_popup_plot():
                     """"
                     set search parameters and query parsed data.
